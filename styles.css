@@ -1,0 +1,38 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+body{
+    background: linear-gradient(45deg, #CCFFFF, #FFCCCC, #FFCCFF);;
+}
+.main {
+    width:fit-content;
+    margin: 0 auto;
+}
+
+.message {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.gameboard {
+    margin-top: 20px;
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
+}
+
+.field {
+    background-color: #f1f1f1;
+    border: 2px solid black;
+    font-size: 50px;
+    text-align: center;
+    height: 120px;
+    line-height: 120px;
+    width: 120px;
+}
+
+.field:hover{
+    background-color: #e1dfdf;
+    cursor: pointer;
+}
