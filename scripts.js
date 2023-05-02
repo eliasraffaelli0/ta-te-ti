@@ -20,11 +20,19 @@ const gameBoard = (() => {
         return board[pos];
     }
 
-    return { insertField, getField };
+    const reset = () => {
+        for(let i=0; i < board.length; i++) {
+            board[i] = "";
+        }
+    }
+
+    return { insertField, getField, reset };
 })();
 
 const displayController = (() => {
     const fields = document.querySelectorAll('.field');
+    const message = document.querySelector('.message');
+    const resetButton = document.querySelector('.reset-button');
 
     //adds the event to each cell so when it's clicked adds the player's move to the board array
     fields.forEach(field => field.addEventListener('click', ()=>{
@@ -36,11 +44,22 @@ const displayController = (() => {
         updateBoard();
     }));
 
+    resetButton.addEventListener('click', () => {
+        gameController.reset();
+        updateMessage('Turno del jugador X');
+    })
+
     //update every field with the board array value using the data-index as the position
     const updateBoard = () => {
         fields.forEach(field => field.innerText = gameBoard.getField(field.getAttribute('data-index')));
     }
 
+    const updateMessage = (newMessage) => {
+        message.innerText = newMessage;
+        updateBoard();
+    }
+
+    return { updateMessage }
 })();
 
 const gameController = (() => {
@@ -52,15 +71,17 @@ const gameController = (() => {
     const playRound = (pos) => {
         gameBoard.insertField(pos, getPlayerTeam());
         if(checkWinner()){
-            console.log('El jugador ' + getPlayerTeam() + ' ganó');
+            displayController.updateMessage('¡El jugador ' + getPlayerTeam() + ' ganó!');
             gameOver = true;
             return;
         };
         if(round===9){
-            console.log('empata3');
+            displayController.updateMessage('¡Empate!');
             gameOver = true;
+            return;
         }
         round++;
+        displayController.updateMessage('Turno del jugador ' + getPlayerTeam());
     }
 
     //gets the current player based on the round number, X is odd rounds and O is the even ones
@@ -91,6 +112,13 @@ const gameController = (() => {
     const isGameOver = () => {
         return gameOver
     }
-    return { playRound, checkWinner, isGameOver }
+
+    const reset = () => {
+        gameBoard.reset();
+        round = 1;
+        gameOver = false;
+    }
+    
+    return { playRound, isGameOver, reset }
 })();
 
