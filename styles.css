@@ -1,6 +1,7 @@
 html, body {
     margin: 0;
     height: 100%;
+    font-family: 'Courier New', Courier, monospace;
 }
 body {
     background: linear-gradient(45deg, #CCFFFF, #FFCCCC, #FFCCFF);;
@@ -53,16 +54,15 @@ body {
 
 .reset-button:hover {
     cursor: pointer;
+    background-color: rgb(59, 109, 145);
     border: solid rgb(52, 97, 129);
 }
 
 .header {
     padding: 9px;
-    /* text-align: center; */
     overflow: hidden;
     background: rgb(69, 131, 176);
     color: white;
-    font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
     margin-bottom: 50px;
     border-bottom: 4px solid rgb(59, 109, 145);
